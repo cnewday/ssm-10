@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lutongnet.base.mapper.OrderMapper">
+	<resultMap type="orderEntity" id="orderResult">
+		<id column="id" property="id" />
+		<result column="order_time" property="orderTime" javaType="date"/>
+		<result column="user_id" property="userId"/>
+		<result column="total_price" property="totalPrice"/>
+		<result column="prod_id" property="prodId"/>
+		<result column="quantity" property="quantity"/>
+		<result column="order_status" property="orderStatus"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="orderEntity">
+		insert into
+			t_order(user_id,order_time,prod_id,quantity,total_price,order_status)
+		values(#{userId},curdate(),#{prodId},#{quantity},#{totalPrice},#{orderStatus})
+	</insert>
+	
+	<select id="select" parameterType="int" resultMap="orderResult">
+		select 
+			*
+		from
+			t_order
+		where
+			id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete
+		from
+			t_order
+		where
+			id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="orderEntity"> 
+		update
+			t_order
+		set
+			user_id = #{userId},
+			total_price = #{totalPrice},
+			quantity = #{quantity}
+		where
+			id = #{id}
+	</update>
+</mapper>

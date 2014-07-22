@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-3.1.xsd
+    http://cxf.apache.org/jaxws 
+    http://cxf.apache.org/schemas/jaxws.xsd">
+	
+	<!-- 任务注解 -->
+	<task:annotation-driven/>
+	
+	<!-- 启用@AspectJ支持 AOP切面编程-->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+	<!-- 注解扫描 -->
+	<!-- 父容器内@Controller标注的类需要DispatcherServlet创建的子容器管理 排除 -->
+	<context:component-scan base-package="com.lutongnet.base">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<!-- 属性文件加载 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<import resource="dao.xml"/>
+	
+	<!-- cxf配置 -->
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+	<bean id="inMessageInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor" />
+	<bean id="outMessageInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
+
+	<!--implementor:指定接口具体实现类 -->
+	<jaxws:endpoint implementor="com.lutongnet.base.webservice.serviceImpl.TestWebService" address="/testService">
+		<!-- 输入日志拦截器 -->
+		<jaxws:inInterceptors>
+			<ref bean="inMessageInterceptor" />
+		</jaxws:inInterceptors>
+		
+		<!-- 输出日志拦截器 -->
+		<jaxws:outInterceptors>
+			<ref bean="outMessageInterceptor" />
+		</jaxws:outInterceptors>
+	</jaxws:endpoint>
+	
+	<!-- WebService 客户端 spring 配置文件cxf与Spring集成，cxf里提供了一个工厂类org.apache.cxf.jaxws.JaxWsProxyFactoryBean， 
+		可以方便实现的调用WebService。serviceClass属性是接口类，address是webService的路径在其他bean里如果要调用webservice， 
+		只要将client这个bean注入到需要使用的bean里。 -->
+	<bean id="client" class="com.lutongnet.base.webservice.client.TestClient" factory-bean="clientFactory" factory-method="create" />
+	<bean id="clientFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="com.lutongnet.base.webservice.service.ITestWebService" />
+		<property name="address" value="http://localhost:8080/ssm/webservice/testService" />
+	</bean>
+</beans>
