@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 import com.lutongnet.base.customAnnotation.ErrorLog;
 
 /**
- * 〈一句话功能简述〉
+ * 解析自定义注解
  * @author     lvhao
  * @since       | 7
  */
