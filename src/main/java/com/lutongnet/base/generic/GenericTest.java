@@ -105,7 +105,37 @@ public class GenericTest
         }
         return t1;
     }
-
+    
+    //复杂泛型
+    public static <T, P> Map<String,Collection<?>> complexGenericTest(){
+		Collection<Object> c1;
+		Collection<Integer> c2;
+		List<Object> list1 = new ArrayList<Object>();
+		List<Integer> list2 = new ArrayList<Integer>();
+		
+		//c1 = c2;
+		//list1 = list2;
+		
+		c1 = list1;
+		//c1 = list2;
+		
+		//c2 = list1;
+		c2 = list2;
+		
+		List<Integer> intList = new ArrayList<Integer>();
+		intList.add(1);
+		intList.add(2);
+		intList.add(3);
+		Set<String> strSet = new HashSet<String>();
+		strSet.add("a");
+		strSet.add("b");
+		strSet.add("c");
+		Map<String,Collection<?>> map = new HashMap<String,Collection<?>>();
+		map.put("list", intList);
+		map.put("set", strSet);
+		return map;
+	}
+	
     // 打印列表
     public static void DisplayList(List<Object> list)
     {
