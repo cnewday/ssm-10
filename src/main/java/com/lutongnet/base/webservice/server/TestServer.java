@@ -19,7 +19,7 @@ import com.lutongnet.base.webservice.service.ITestWebService;
 import com.lutongnet.base.webservice.serviceImpl.TestWebService;
 
 /**
- * 〈一句话功能简述〉
+ * service Server
  * @author     lvhao
  * @since       | 
  */

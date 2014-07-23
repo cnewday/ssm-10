@@ -19,7 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.lutongnet.base.webservice.service.ITestWebService;
 
 /**
- * 〈一句话功能简述〉
+ * 测试类
  * @author     lvhao
  * @since       | 
  */

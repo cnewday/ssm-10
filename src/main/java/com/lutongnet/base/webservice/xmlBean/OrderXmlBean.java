@@ -28,7 +28,7 @@ import com.lutongnet.base.customAnnotation.ErrorLog;
 
 
 /**
- * 〈一句话功能简述〉
+ * xmlBean
  * @author     lvhao
  * @since       | 
  */

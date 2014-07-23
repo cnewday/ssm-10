@@ -24,7 +24,7 @@ import com.lutongnet.base.webservice.xmlBean.OrderXmlBean;
 import com.lutongnet.base.webservice.xmlBean.UserXmlBean;
 
 /**
- * 〈一句话功能简述〉
+ * serviceImpl
  * @author     lvhao
  * @since       | 
  */

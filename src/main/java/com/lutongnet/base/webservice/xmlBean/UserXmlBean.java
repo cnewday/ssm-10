@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * 〈一句话功能简述〉
+ * xmlBean 
  * @author     lvhao
  * @since       | 
  */
