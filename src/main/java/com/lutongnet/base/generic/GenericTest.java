@@ -19,8 +19,7 @@ import java.util.List;
 import org.springframework.util.Assert;
 
 /**
- * 〈一句话功能简述〉
- * 
+ *泛型实例
  * @author lvhao
  * @since |
  */
@@ -106,7 +105,7 @@ public class GenericTest
         return t1;
     }
     
-    //复杂泛型
+    //集合泛型
     public static <T, P> Map<String,Collection<?>> complexGenericTest(){
 		Collection<Object> c1;
 		Collection<Integer> c2;
