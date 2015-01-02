@@ -90,7 +90,6 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- 测试jar依赖结束 -->
 
 		<!-- sh框架依赖jar开始 -->
