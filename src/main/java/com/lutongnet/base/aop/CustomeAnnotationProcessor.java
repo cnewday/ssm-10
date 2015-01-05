@@ -36,6 +36,8 @@ public class CustomeAnnotationProcessor
 {
     //注解？ 修饰符? 返回值类型 类型声明?方法名(参数列表) 异常列表
     //@Pointcut(value="execution(* *(..))")
+    
+    // test git
     @Pointcut("@annotation(com.lutongnet.base.customAnnotation.ErrorLog)")
     private void errorLogAnnotationProcessor(){}
     
